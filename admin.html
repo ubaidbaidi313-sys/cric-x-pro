@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cric-X Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-950 text-white flex items-center justify-center min-h-screen">
+    <div class="bg-zinc-900 p-8 rounded-[30px] border border-emerald-500/20 w-full max-w-md">
+        <h1 class="text-2xl font-black italic text-emerald-500 mb-6 uppercase">Update Live Score</h1>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="text-[10px] font-bold uppercase text-zinc-500">PAK Score</label>
+                <input id="scoreInput" type="text" placeholder="e.g. 194/3 (20.0)" class="w-full bg-black border border-white/10 p-3 rounded-xl mt-1 outline-none focus:border-emerald-500 text-sm">
+            </div>
+            <div>
+                <label class="text-[10px] font-bold uppercase text-zinc-500">IND Status</label>
+                <input id="indInput" type="text" placeholder="e.g. Yet to bat" class="w-full bg-black border border-white/10 p-3 rounded-xl mt-1 outline-none focus:border-emerald-500 text-sm">
+            </div>
+            <div>
+                <label class="text-[10px] font-bold uppercase text-zinc-500">Series Name</label>
+                <input id="statusInput" type="text" placeholder="e.g. T20 World Cup" class="w-full bg-black border border-white/10 p-3 rounded-xl mt-1 outline-none focus:border-emerald-500 text-sm">
+            </div>
+            
+            <button onclick="updateScore()" class="w-full bg-emerald-500 text-black font-black py-4 rounded-xl hover:bg-emerald-400 transition-all uppercase tracking-tighter mt-4">Update All Screens</button>
+            <p id="msg" class="text-center text-[10px] text-emerald-500 font-bold mt-2 opacity-0">Update Successful!</p>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFoOBzZPZPMI_rvuWjSevEqQbeOjcPKww",
+            authDomain: "cric-x-pro.firebaseapp.com",
+            databaseURL: "https://cric-x-pro-default-rtdb.firebaseio.com",
+            projectId: "cric-x-pro",
+            storageBucket: "cric-x-pro.firebasestorage.app",
+            messagingSenderId: "610933718519",
+            appId: "1:610933718519:web:fb3e46a50a001d3d7b82f2",
+            measurementId: "G-ML9SELTXJ0"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        function updateScore() {
+            const score = document.getElementById('scoreInput').value;
+            const ind = document.getElementById('indInput').value;
+            const status = document.getElementById('statusInput').value;
+
+            database.ref('match1').update({
+                score: score,
+                ind_score: ind,
+                status: status
+            }).then(() => {
+                const msg = document.getElementById('msg');
+                msg.style.opacity = "1";
+                setTimeout(() => { msg.style.opacity = "0"; }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
