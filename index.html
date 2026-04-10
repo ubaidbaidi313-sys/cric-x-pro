@@ -10,8 +10,8 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: white; overflow-x: hidden; }
         .glass-nav { background: rgba(10, 10, 10, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         .main-card { background: linear-gradient(145deg, #121212, #080808); border: 1px solid rgba(255, 255, 255, 0.03); transition: 0.4s ease; }
-        .recent-card { background: rgba(20, 20, 20, 0.5); border: 1px solid rgba(255, 255, 255, 0.02); transition: 0.3s; }
-        .recent-card:hover { border-color: #10b981; }
+        .recent-card { background: rgba(20, 20, 20, 0.5); border: 1px solid rgba(255, 255, 255, 0.02); transition: 0.3s; height: 100%; }
+        .recent-card:hover { border-color: #10b981; background: rgba(30, 30, 30, 0.5); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         #loader { position: fixed; inset: 0; background: #050505; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.8s; }
         .loader-hidden { opacity: 0; visibility: hidden; }
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div id="live-container" class="flex gap-6 overflow-x-auto pb-6 no-scrollbar">
-                <div class="animate-pulse text-zinc-800 font-black italic">SEARCHING LIVE MATCHES...</div>
+                <div class="text-zinc-800 font-black italic animate-pulse">CHECKING SATELLITE FEEDS...</div>
             </div>
         </section>
 
@@ -59,7 +59,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
 
     <script>
-        // 1. Firebase Setup
         const firebaseConfig = {
             apiKey: "AIzaSyAFoOBzZPZPMI_rvuWjSevEqQbeOjcPKww",
             authDomain: "cric-x-pro.firebaseapp.com",
@@ -70,75 +69,73 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // 2. API Config
         const API_KEY = "774480cda4mshdee83eb8c7a1f81p169bd2jsn66911a533ae8";
         const API_HOST = "cricket-live-data.p.rapidapi.com";
 
-        // Loader
         window.onload = () => setTimeout(() => document.getElementById('loader').classList.add('loader-hidden'), 1200);
 
-        // 3. MASTER DATA ENGINE (Fetches Everything & Stores in Firebase)
         async function syncData() {
             try {
-                // Fetch Live
                 const liveRes = await fetch(`https://${API_HOST}/matches-live`, { headers: { 'X-RapidAPI-Key': API_KEY, 'X-RapidAPI-Host': API_HOST }});
                 const liveData = await liveRes.json();
                 if(liveData.results) db.ref('archive/live').set(liveData.results);
 
-                // Fetch Recent (IPL, PSL, etc. automatically included)
                 const recentRes = await fetch(`https://${API_HOST}/matches-recent`, { headers: { 'X-RapidAPI-Key': API_KEY, 'X-RapidAPI-Host': API_HOST }});
                 const recentData = await recentRes.json();
-                if(recentData.results) db.ref('archive/recent').set(recentData.results.slice(0, 12)); // Store last 12 matches
+                if(recentData.results) db.ref('archive/recent').set(recentData.results.slice(0, 12));
             } catch (e) { console.error("Sync Error:", e); }
         }
 
-        // 4. UI RENDERER (Listens to Firebase)
         function renderFromDatabase() {
-            // Render Live
+            // Live Update
             db.ref('archive/live').on('value', snap => {
                 const container = document.getElementById('live-container');
                 container.innerHTML = '';
                 if(snap.exists() && snap.val().length > 0) {
                     snap.val().forEach(m => {
+                        const sName = m.series ? m.series.name : (m.series_name || "International");
                         container.innerHTML += `
                             <div class="min-w-[420px] main-card rounded-[40px] p-10 border border-emerald-500/10 relative overflow-hidden">
                                 <div class="absolute top-0 right-0 p-4"><span class="bg-emerald-500 text-black text-[8px] font-black px-3 py-1 rounded-full animate-pulse">LIVE</span></div>
-                                <p class="text-[10px] text-zinc-500 font-bold mb-4 uppercase italic tracking-widest">${m.series.name}</p>
+                                <p class="text-[10px] text-zinc-500 font-bold mb-4 uppercase italic tracking-widest">${sName}</p>
                                 <div class="flex justify-between items-center">
                                     <div class="text-2xl font-black italic tracking-tighter w-1/2">${m.match_title}</div>
-                                    <div class="text-emerald-400 font-black text-3xl tracking-tighter">${m.live_details.score || 'Starting...'}</div>
+                                    <div class="text-emerald-400 font-black text-3xl tracking-tighter">${m.live_details ? m.live_details.score : 'Starting...'}</div>
                                 </div>
                             </div>`;
                     });
                 } else {
-                    container.innerHTML = '<div class="bg-zinc-900/50 p-8 rounded-3xl text-zinc-600 font-bold italic border border-white/5 w-full text-center uppercase tracking-widest">No Matches Live Right Now - Checking Recent Results Below</div>';
+                    container.innerHTML = '<div class="bg-zinc-900/50 p-8 rounded-3xl text-zinc-600 font-bold italic border border-white/5 w-full text-center uppercase tracking-widest text-[10px]">No Live Matches Right Now</div>';
                 }
             });
 
-            // Render Recent Results (The Archive)
+            // Recent Update
             db.ref('archive/recent').on('value', snap => {
                 const grid = document.getElementById('results-grid');
                 grid.innerHTML = '';
                 if(snap.exists()){
                     snap.val().forEach(m => {
+                        const sName = m.series ? m.series.name : (m.series_name || "T20 Series");
                         grid.innerHTML += `
                             <div class="recent-card p-8 rounded-[35px] border border-white/5 hover:bg-zinc-900 transition-all">
                                 <div class="flex justify-between items-start mb-4">
-                                    <p class="text-[8px] text-emerald-500 font-black uppercase tracking-widest">${m.series.name}</p>
-                                    <span class="text-[8px] text-zinc-600 font-bold uppercase">${m.date || ''}</span>
+                                    <p class="text-[8px] text-emerald-500 font-black uppercase tracking-widest">${sName}</p>
+                                    <span class="text-[8px] text-zinc-600 font-bold uppercase">${m.date || 'Finished'}</span>
                                 </div>
                                 <div class="font-black text-lg mb-4 italic tracking-tighter text-zinc-200">${m.match_title}</div>
-                                <div class="text-[10px] font-bold text-zinc-500 uppercase py-2 px-4 bg-black/50 rounded-xl border border-white/5 inline-block italic">${m.result}</div>
+                                <div class="text-[10px] font-bold text-zinc-500 uppercase py-2 px-4 bg-black/50 rounded-xl border border-white/5 inline-block italic">${m.result || 'Match Completed'}</div>
                             </div>`;
                     });
+                } else {
+                    grid.innerHTML = '<div class="col-span-full text-center text-zinc-800 font-black italic py-10">NO RECENT DATA IN DATABASE. SYNCING...</div>';
+                    syncData();
                 }
             });
         }
 
-        // Start the Engine
         syncData(); 
         renderFromDatabase();
-        setInterval(syncData, 600000); // Update every 10 mins
+        setInterval(syncData, 600000);
     </script>
 </body>
 </html>
