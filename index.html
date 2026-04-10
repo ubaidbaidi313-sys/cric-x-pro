@@ -31,93 +31,77 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* LOADING SCREEN BOX */
-#loader {
-    position: fixed;
-    inset: 0;
-    background: #050505;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.8s ease, visibility 0.8s;
-}
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #050505;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
 
-/* THE NEON LOGO ANIMATION */
-.loader-logo {
-    font-size: 3rem;
-    font-weight: 900;
-    font-style: italic;
-    color: #10b981;
-    letter-spacing: -2px;
-    animation: neon-pulse 1.5s infinite alternate;
-}
+        .loader-logo {
+            font-size: 3rem;
+            font-weight: 900;
+            font-style: italic;
+            color: #10b981;
+            letter-spacing: -2px;
+            animation: neon-pulse 1.5s infinite alternate;
+        }
 
-@keyframes neon-pulse {
-    0% { opacity: 0.3; transform: scale(0.95); filter: blur(2px); }
-    100% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 20px #10b981); }
-}
+        @keyframes neon-pulse {
+            0% { opacity: 0.3; transform: scale(0.95); filter: blur(2px); }
+            100% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 20px #10b981); }
+        }
 
-/* SMOOTH FADE OUT */
-.loader-hidden {
-    opacity: 0;
-    visibility: hidden;
-}
+        .loader-hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body class="pb-20">
     <div id="loader">
-    <div class="loader-logo uppercase tracking-tighter">CRIC-X PRO</div>
-    <p class="text-[9px] font-black text-zinc-700 uppercase tracking-[0.5em] mt-4">Syncing Live Data...</p>
-</div>
-
- <nav class="sticky top-0 z-50 glass-nav px-8 py-5 flex justify-between items-center border-b border-white/5">
-    
-    <div class="flex items-center gap-12">
-        <div class="flex items-center gap-3">
-            <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]"></div>
-            <h1 class="text-2xl font-black italic tracking-tighter uppercase text-white hover:text-emerald-400 transition-all cursor-pointer">
-                CRIC-X <span class="text-emerald-500">PRO</span>
-            </h1>
-        </div>
-        
-        <div class="hidden xl:flex gap-8 text-[9px] font-black uppercase tracking-[0.3em] text-zinc-500">
-            <a href="index.html" class="hover:text-white transition-all">Home</a>
-            <a href="news.html" class="hover:text-white transition-all">News Hub</a>
-            <a href="series.html" class="hover:text-white transition-all">Schedules</a>
-            <a href="rankings.html" class="hover:text-white transition-all">Rankings</a>
-            <a href="compare.html" class="hover:text-white transition-all">Battle</a>
-            <a href="squads.html" class="hover:text-white transition-all">Squads</a>
-        </div>
+        <div class="loader-logo uppercase tracking-tighter">CRIC-X PRO</div>
+        <p class="text-[9px] font-black text-zinc-700 uppercase tracking-[0.5em] mt-4">Syncing Live Data...</p>
     </div>
 
-    <div class="flex items-center gap-6">
-        <div class="hidden md:flex items-center bg-white/5 border border-white/10 px-4 py-2 rounded-full gap-3 group focus-within:border-emerald-500 transition-all">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-zinc-500 group-focus-within:text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input type="text" placeholder="Search Players, Series..." class="bg-transparent border-none outline-none text-[10px] font-bold uppercase tracking-widest text-white placeholder:text-zinc-700 w-40">
+    <nav class="sticky top-0 z-50 glass-nav px-8 py-5 flex justify-between items-center border-b border-white/5">
+        <div class="flex items-center gap-12">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]"></div>
+                <h1 class="text-2xl font-black italic tracking-tighter uppercase text-white hover:text-emerald-400 transition-all cursor-pointer">
+                    CRIC-X <span class="text-emerald-500">PRO</span>
+                </h1>
+            </div>
+            
+            <div class="hidden xl:flex gap-8 text-[9px] font-black uppercase tracking-[0.3em] text-zinc-500">
+                <a href="index.html" class="text-white">Home</a>
+                <a href="#" class="hover:text-white transition-all">News Hub</a>
+                <a href="#" class="hover:text-white transition-all">Schedules</a>
+                <a href="#" class="hover:text-white transition-all">Rankings</a>
+                <a href="#" class="hover:text-white transition-all">Battle</a>
+                <a href="#" class="hover:text-white transition-all">Squads</a>
+            </div>
         </div>
 
-        <div class="flex items-center gap-4 border-l border-white/10 pl-6">
-            <div class="text-right hidden sm:block">
-                <p class="text-[8px] font-black text-zinc-600 uppercase leading-none">Welcome Back</p>
-                <p class="text-[10px] font-black text-white uppercase tracking-tighter">Guest User</p>
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex items-center bg-white/5 border border-white/10 px-4 py-2 rounded-full gap-3 group focus-within:border-emerald-500 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-zinc-500 group-focus-within:text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" placeholder="Search Players..." class="bg-transparent border-none outline-none text-[10px] font-bold uppercase tracking-widest text-white placeholder:text-zinc-700 w-40">
             </div>
             <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-800 p-[1px]">
-                <div class="w-full h-full bg-[#050505] rounded-[15px] flex items-center justify-center overflow-hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                    </svg>
-                </div>
+                <div class="w-full h-full bg-[#050505] rounded-[15px] flex items-center justify-center overflow-hidden font-black text-emerald-500 text-[10px]">U</div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <main class="max-w-[1400px] mx-auto px-6 mt-12">
-        
         <header class="flex justify-between items-end mb-8">
             <div>
                 <p class="text-emerald-500 font-black text-[10px] uppercase tracking-[0.5em] mb-2">In Play</p>
@@ -126,153 +110,81 @@
         </header>
 
         <div class="flex gap-6 overflow-x-auto pb-10 no-scrollbar">
-            
-            <a href="cricket.html" class="min-w-[450px] main-card rounded-[50px] p-10 relative group block">
+            <div class="min-w-[450px] main-card rounded-[50px] p-10 relative group block cursor-pointer">
                 <div class="flex justify-between items-center mb-10">
                     <span class="bg-emerald-500 text-black text-[9px] font-black px-3 py-1 rounded italic uppercase">Live</span>
-                    <span class="text-zinc-500 text-[9px] font-bold uppercase tracking-widest">T20 World Cup</span>
+                    <span id="match-status" class="text-zinc-500 text-[9px] font-bold uppercase tracking-widest text-right">T20 World Cup</span>
                 </div>
                 <div class="flex justify-between items-center px-4">
                     <div class="text-center">
                         <p class="text-4xl font-black italic mb-2 uppercase">PAK</p>
-                        <p class="text-emerald-400 font-black text-xl">194/3</p>
+                        <p id="live-score" class="text-emerald-400 font-black text-xl">Connecting...</p>
                     </div>
                     <div class="text-zinc-800 font-black italic text-2xl uppercase text-center mx-4">VS</div>
-                    <div class="text-center opacity-30">
-                        <p class="text-4xl font-black italic mb-2 uppercase text-zinc-500">IND</p>
-                        <p class="text-[10px] font-bold uppercase tracking-tighter">Yet to bat</p>
+                    <div class="text-center">
+                        <p class="text-4xl font-black italic mb-2 uppercase text-zinc-300">IND</p>
+                        <p id="ind-score" class="text-[10px] font-bold uppercase tracking-tighter text-zinc-500">Yet to bat</p>
                     </div>
                 </div>
                 <div class="mt-10 pt-6 border-t border-white/5 text-center">
                     <p class="text-[9px] text-zinc-600 font-black uppercase tracking-[0.3em] group-hover:text-emerald-400 transition-colors">Enter Match Center →</p>
                 </div>
-            </a>
+            </div>
 
-            <div class="min-w-[450px] main-card rounded-[50px] p-10 relative opacity-60">
+            <div class="min-w-[450px] main-card rounded-[50px] p-10 relative opacity-40">
                 <div class="flex justify-between items-center mb-10">
                     <span class="bg-zinc-800 text-zinc-400 text-[9px] font-black px-3 py-1 rounded italic uppercase">Upcoming</span>
-                    <span class="text-zinc-500 text-[9px] font-bold uppercase tracking-widest">The Ashes</span>
                 </div>
-                <div class="flex justify-between items-center px-4">
-                    <div class="text-center"><p class="text-4xl font-black italic text-zinc-600 uppercase">AUS</p></div>
-                    <div class="text-zinc-800 font-black italic text-xl uppercase">Starts 2h</div>
-                    <div class="text-center"><p class="text-4xl font-black italic text-zinc-600 uppercase">ENG</p></div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="mt-16">
-            <header class="mb-10">
-                <p class="text-zinc-600 font-black text-[10px] uppercase tracking-[0.5em] mb-2">Editor's Picks</p>
-                <h2 class="text-5xl font-black italic tracking-tighter uppercase">Latest Stories</h2>
-            </header>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-                <a href="player-profile.html" class="md:col-span-8 h-[550px] main-card rounded-[60px] p-12 relative overflow-hidden group block">
-                    <div class="absolute inset-0 bg-emerald-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
-                    
-                    <div class="relative h-full flex flex-col justify-end z-10">
-                        <span class="text-emerald-400 font-black text-[10px] uppercase tracking-[0.5em] mb-4 italic">Exclusive Analysis</span>
-                        <h3 class="text-5xl font-black italic tracking-tighter leading-none mb-6 group-hover:text-emerald-400 transition-colors">THE ART OF BABAR'S COVER DRIVE</h3>
-                        <p class="text-zinc-400 text-sm max-w-lg leading-relaxed">Discover why the King of Lahore remains the most technically sound batter in the modern era.</p>
-                        <div class="mt-8">
-                            <span class="text-[9px] font-black uppercase tracking-widest text-white border-b-2 border-emerald-500 pb-1">View Full Profile →</span>
-                        </div>
-                    </div>
-                </a>
-
-                <div class="md:col-span-4 grid grid-rows-2 gap-6">
-                    <div class="main-card rounded-[50px] p-8 flex flex-col justify-end group cursor-pointer hover:border-emerald-500/30 transition-all">
-                        <span class="text-zinc-600 font-black text-[8px] uppercase tracking-[0.4em] mb-2 italic">Records</span>
-                        <h4 class="text-xl font-black italic tracking-tight group-hover:text-emerald-400 transition-colors uppercase leading-tight">SHAHEEN REACHES 200 WICKETS MILESTONE</h4>
-                    </div>
-                    <div class="main-card rounded-[50px] p-8 flex flex-col justify-end group cursor-pointer hover:border-emerald-500/30 transition-all">
-                        <span class="text-zinc-600 font-black text-[8px] uppercase tracking-[0.4em] mb-2 italic">League</span>
-                        <h4 class="text-xl font-black italic tracking-tight group-hover:text-emerald-400 transition-colors uppercase leading-tight">PSL 2026: DRAFT PICKS REVEALED</h4>
-                    </div>
-                </div>
+                <div class="text-center py-4 text-zinc-500 uppercase font-black text-xs italic">Next Match Scheduled Soon</div>
             </div>
         </div>
-
     </main>
 
-<footer class="mt-40 bg-[#0a0a0a] border-t border-white/5 pt-24 pb-12">
-    <div class="max-w-[1400px] mx-auto px-8">
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
-            <div class="space-y-8">
-                <h2 class="text-4xl font-extrabold italic tracking-tighter uppercase text-emerald-400">CRIC-X <span class="text-white">PRO</span></h2>
-                <p class="text-zinc-500 text-sm leading-relaxed font-medium">The world's most advanced cricket data engine. Real-time scores, deep analytics, and futuristic interface for the fans of 2026.</p>
-                <div class="flex gap-4">
-                    <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-emerald-500 transition-all cursor-pointer text-xs font-black uppercase tracking-tighter">FB</div>
-                    <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-emerald-500 transition-all cursor-pointer text-xs font-black uppercase tracking-tighter">IG</div>
-                    <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:border-emerald-500 transition-all cursor-pointer text-xs font-black uppercase tracking-tighter">X</div>
-                </div>
-            </div>
-
-            <div class="space-y-6">
-                <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 italic">Network</h4>
-                <ul class="space-y-4 text-xs font-bold uppercase tracking-widest text-zinc-400">
-                    <li><a href="series.html" class="hover:text-white transition-all">Schedules</a></li>
-                    <li><a href="rankings.html" class="hover:text-white transition-all">ICC Rankings</a></li>
-                    <li><a href="news.html" class="hover:text-white transition-all">Latest News</a></li>
-                    <li><a href="records.html" class="hover:text-white transition-all">World Records</a></li>
-                </ul>
-            </div>
-
-            <div class="space-y-6">
-                <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 italic">Information</h4>
-                <ul class="space-y-4 text-xs font-bold uppercase tracking-widest text-zinc-400">
-                    <li><a href="#" class="hover:text-white transition-all">About Us</a></li>
-                    <li><a href="#" class="hover:text-white transition-all">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-white transition-all">Contact Hub</a></li>
-                    <li><a href="#" class="hover:text-white transition-all">Editorial Team</a></li>
-                </ul>
-            </div>
-
-            <div class="space-y-8">
-                <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-500 italic">Experience Mobile</h4>
-                <div class="space-y-4">
-                    <div class="bg-white text-black p-4 rounded-2xl flex items-center gap-4 cursor-pointer hover:scale-105 transition-all">
-                        <div class="text-2xl italic font-black">A</div>
-                        <div>
-                            <p class="text-[8px] font-black uppercase opacity-60 leading-none">Download on</p>
-                            <p class="text-sm font-black uppercase tracking-tight">App Store</p>
-                        </div>
-                    </div>
-                    <div class="bg-white/5 border border-white/10 p-4 rounded-2xl flex items-center gap-4 cursor-pointer hover:border-emerald-500 transition-all">
-                        <div class="text-2xl italic font-black text-emerald-500">G</div>
-                        <div>
-                            <p class="text-[8px] font-black uppercase opacity-60 leading-none">Get it on</p>
-                            <p class="text-sm font-black uppercase tracking-tight">Google Play</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <footer class="mt-20 bg-[#0a0a0a] border-t border-white/5 pt-12 pb-12">
+        <div class="max-w-[1400px] mx-auto px-8 text-center">
+            <p class="text-[9px] font-black text-zinc-600 uppercase tracking-[0.2em]">© 2026 CRIC-X PRO NETWORK. Real-time Firebase Sync Active.</p>
         </div>
+    </footer>
 
-        <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p class="text-[9px] font-black text-zinc-600 uppercase tracking-[0.2em]">© 2026 CRIC-X PRO NETWORK. All Rights Reserved.</p>
-            <div class="flex gap-10">
-                <span class="text-[9px] font-black text-zinc-800 uppercase tracking-widest italic">PCB Official Partner</span>
-                <span class="text-[9px] font-black text-zinc-800 uppercase tracking-widest italic">ICC Data Sync Active</span>
-            </div>
-        </div>
-    </div>
-</footer>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
 
-<script>
-    // Site load hone ke baad loader ko hide karna
-    window.addEventListener("load", () => {
-        const loader = document.getElementById("loader");
-        // 1.5 Seconds ka delay taaki animation poori dikhayi de
-        setTimeout(() => {
-            loader.classList.add("loader-hidden");
-        }, 1500);
-    });
-</script>
+    <script>
+        // Loader logic
+        window.addEventListener("load", () => {
+            const loader = document.getElementById("loader");
+            setTimeout(() => { loader.classList.add("loader-hidden"); }, 1000);
+        });
 
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFoOBzZPZPMI_rvuWjSevEqQbeOjcPKww",
+            authDomain: "cric-x-pro.firebaseapp.com",
+            databaseURL: "https://cric-x-pro-default-rtdb.firebaseio.com",
+            projectId: "cric-x-pro",
+            storageBucket: "cric-x-pro.firebasestorage.app",
+            messagingSenderId: "610933718519",
+            appId: "1:610933718519:web:fb3e46a50a001d3d7b82f2",
+            measurementId: "G-ML9SELTXJ0"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // 1. Listen for PAK Score
+        database.ref('match1/score').on('value', (snapshot) => {
+            if(snapshot.exists()) document.getElementById('live-score').innerText = snapshot.val();
+        });
+
+        // 2. Listen for IND Score
+        database.ref('match1/ind_score').on('value', (snapshot) => {
+            if(snapshot.exists()) document.getElementById('ind-score').innerText = snapshot.val();
+        });
+
+        // 3. Listen for Match Status
+        database.ref('match1/status').on('value', (snapshot) => {
+            if(snapshot.exists()) document.getElementById('match-status').innerText = snapshot.val();
+        });
+    </script>
 </body>
 </html>
